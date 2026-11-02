@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, yearsInBusiness } from '../data/site';
+import yesWeDo from '../assets/images/yes-we-do.png';
+import teamFinished from '../assets/images/team-finished.jpg';
+import badges from '../assets/images/badges.png';
+
+const values = [
+  { icon: 'shield', title: 'Honesty', text: 'We are transparent, truthful and fair in every interaction — earning trust through open communication and ethical work.' },
+  { icon: 'check', title: 'Accountability', text: 'We take ownership of our work, follow through on our promises, and hold ourselves to the highest standards of professionalism.' },
+  { icon: 'wrench', title: 'Craftsmanship', text: 'Every project is a reflection of our name. From small repairs to large renovations, we bring precision, care and pride to every detail.' },
+] as const;
+const stats = [
+  { value: `${yearsInBusiness}+`, label: 'Years of experience' },
+  { value: site.stats.team, label: 'Team members' },
+  { value: site.stats.projects, label: 'Completed projects' },
+  { value: site.stats.bbb, label: 'Better Business Bureau' },
+];
+---
+<Base title="About Us" description={`Since ${site.foundedYear}, JPC Services Inc. has served Greater Vancouver with honest, high-quality repair, restoration and renovation work. A+ BBB rated, founding member of CCRAC.`}>
+  <PageHero eyebrow="About us" title="Committed to excellence since day one" subtitle="A reputation built on quality, integrity and trust across Greater Vancouver." crumbs={[{ label: 'About' }]} />
+
+  <section class="section">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2">
+      <div class="prose-jpc">
+        <p class="eyebrow">Who we are</p>
+        <h2 class="!mt-2 !text-3xl !font-extrabold sm:!text-4xl">Yes We Do.</h2>
+        <p>Since {site.foundedYear}, JPC Services Inc. has proudly served the Greater Vancouver area. We offer a full spectrum of services — residential, commercial and industrial renovation, water damage restoration, leak detection and strata maintenance. Whether it’s a full-scale rebuild or a small repair, our team brings the same dedication and attention to detail.</p>
+        <p>As a founding member of the <strong class="text-navy-900">Chinese Construction and Renovation Association of Canada (CCRAC)</strong>, JPC plays an active role in strengthening the industry and raising standards for everyone — homeowners, designers, engineers and builders.</p>
+        <p>Recognized for our honest and reliable approach, we’re proud to hold an <strong class="text-navy-900">A+ rating from the Better Business Bureau</strong> — a reflection of our values and the trust our clients place in us.</p>
+        <Image src={badges} alt="CCRAC founding member and BBB Accredited Business" width={240} class="mt-6 h-auto w-60" />
+      </div>
+      <Image src={yesWeDo} alt="JPC Services team member in a Yes We Do shirt" widths={[500, 800]} sizes="(min-width: 1024px) 560px, 100vw" class="aspect-square w-full rounded-3xl object-cover" />
+    </div>
+  </section>
+
+  <section class="bg-navy-900 py-14 text-white">
+    <dl class="container-x grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
+      {stats.map((s) => (<div><dd class="font-display text-4xl font-extrabold text-brand-500">{s.value}</dd><dt class="mt-1 text-sm text-white/75">{s.label}</dt></div>))}
+    </dl>
+  </section>
+
+  <section class="section">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Mission &amp; values</p>
+        <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">The go-to experts, trusted by homeowners and respected by peers</h2>
+        <p class="mt-4 text-muted">We are driven by a passion for quality, a commitment to integrity and a relentless focus on customer satisfaction.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {values.map((v) => (
+          <div class="rounded-2xl border border-slate-200 p-8">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-100 text-brand-600"><Icon name={v.icon} class="h-6 w-6" /></span>
+            <h3 class="mt-4 text-xl font-bold">{v.title}</h3>
+            <p class="mt-2 leading-relaxed text-muted">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-sand">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2">
+      <Image src={teamFinished} alt="Jeff Jiang with the JPC team on a completed project" widths={[600, 1000]} sizes="(min-width: 1024px) 600px, 100vw" class="aspect-[4/3] w-full rounded-3xl object-cover" />
+      <div>
+        <p class="eyebrow">Founder &amp; President</p>
+        <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">Jeff Jiang</h2>
+        <div class="prose-jpc mt-4">
+          <p>Jeff is the dedicated force behind JPC. He specializes in tackling challenging home issues — offering solutions where larger firms shy away.</p>
+          <p>His commitment to integrity and excellence shows in his meticulous approach to every project. With an extensive background in resolving complex home problems, he excels at problem-solving and creative solutions.</p>
+          <p>Jeff’s dedication to both his clients and his team defines how JPC works. Experience the difference — where expertise meets passion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews limit={3} />
+  <CtaBand />
+</Base>

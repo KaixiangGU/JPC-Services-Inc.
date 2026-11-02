@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const serviceTypes = ['Water leak', 'Water damage / restoration', 'Home renovation', 'Home repair', 'Commercial renovation', 'Strata maintenance', 'Roofing', 'Plumbing / HVAC', 'Waterproofing', 'Landscaping', 'Painting', 'Electrical', 'Other'];
+const sources = ['Family / friend referral', 'Google', 'Xiaohongshu (小红书)', 'BBB', 'Company vehicle', 'Job site sign', 'Other'];
+---
+<Base title="Contact Us — Get a Free Quote" description={`Get a free quote from JPC Services Inc. Call ${site.phone} or send us your project details. Richmond, BC — serving Greater Vancouver.`}>
+  <PageHero eyebrow="Contact us" title="Get a free quote" subtitle="Tell us about your project — a few details and a photo help us give you an accurate quote." crumbs={[{ label: 'Contact Us' }]} />
+
+  <section class="section">
+    <div class="container-x grid gap-12 lg:grid-cols-5">
+      <form action={site.formAction} method="post" enctype="multipart/form-data" class="space-y-6 rounded-3xl border border-slate-200 p-6 shadow-sm sm:p-10 lg:col-span-3" id="quote-form">
+        <!-- Honeypot: hidden from people, bots fill it in -->
+        <div class="hidden" aria-hidden="true"><label>Leave empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="sm:col-span-2"><label for="name" class="label">Name *</label><input id="name" name="name" required autocomplete="name" class="field" /></div>
+          <div><label for="email" class="label">Email *</label><input id="email" name="email" type="email" required autocomplete="email" class="field" /></div>
+          <div><label for="phone" class="label">Phone *</label><input id="phone" name="phone" type="tel" required autocomplete="tel" class="field" /></div>
+          <div>
+            <label for="service" class="label">Type of service</label>
+            <select id="service" name="service" class="field">
+              <option value="">Select…</option>
+              {serviceTypes.map((s) => <option>{s}</option>)}
+            </select>
+          </div>
+          <div>
+            <label for="source" class="label">How did you hear about us?</label>
+            <select id="source" name="source" class="field">
+              <option value="">Select…</option>
+              {sources.map((s) => <option>{s}</option>)}
+            </select>
+          </div>
+          <div><label for="address" class="label">Job address *</label><input id="address" name="address" required autocomplete="street-address" class="field" placeholder="Street address" /></div>
+          <div><label for="city" class="label">City *</label><input id="city" name="city" required autocomplete="address-level2" class="field" placeholder="e.g. Richmond" /></div>
+          <div class="sm:col-span-2"><label for="message" class="label">Describe the job *</label><textarea id="message" name="message" rows="5" required class="field" placeholder="What’s happening, where, and when did you first notice it?"></textarea></div>
+          <div class="sm:col-span-2">
+            <label for="photos" class="label">Photos <span class="font-normal text-muted">(optional, up to 5 — JPG, PNG, HEIC)</span></label>
+            <label for="photos" class="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-slate-300 px-4 py-5 text-sm text-muted hover:border-brand-500">
+              <Icon name="upload" class="h-6 w-6 text-brand-600" /><span id="photos-label">Tap to add photos of the problem area</span>
+            </label>
+            <input id="photos" name="photos[]" type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif,.heic,.heif" multiple class="sr-only" />
+          </div>
+        </div>
+        <button type="submit" class="btn-primary w-full py-4 text-base sm:w-auto sm:px-10">Send my request</button>
+        <p class="text-xs text-muted">By submitting, you agree to be contacted about your request. See our <a href="/privacy/" class="underline">Privacy Policy</a>.</p>
+      </form>
+
+      <aside class="space-y-6 lg:col-span-2">
+        <div class="rounded-3xl bg-navy-900 p-8 text-white">
+          <h2 class="text-xl font-bold !text-white">Prefer to talk?</h2>
+          <a href={site.phoneHref} class="mt-4 flex items-center gap-3 font-display text-2xl font-extrabold text-brand-500"><Icon name="phone" class="h-6 w-6" />{site.phone}</a>
+          <ul class="mt-6 space-y-4 text-sm text-white/80">
+            <li class="flex gap-3"><Icon name="mail" class="mt-0.5 h-5 w-5 shrink-0 text-brand-500" /><a href={`mailto:${site.email}`} class="break-all hover:text-white">{site.email}</a></li>
+            <li class="flex gap-3"><Icon name="pin" class="mt-0.5 h-5 w-5 shrink-0 text-brand-500" /><span>{site.address.street}<br />{site.address.city}, {site.address.region} {site.address.postalCode}</span></li>
+            <li class="flex gap-3"><Icon name="clock" class="mt-0.5 h-5 w-5 shrink-0 text-brand-500" /><span>{site.hours.map((h) => <span class="block">{h.days}: {h.time}</span>)}</span></li>
+          </ul>
+        </div>
+        <div class="overflow-hidden rounded-3xl border border-slate-200">
+          <iframe title="Map to JPC Services Inc." src={site.mapsEmbed} class="h-72 w-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+<script>
+  const input = document.getElementById('photos') as HTMLInputElement | null;
+  const label = document.getElementById('photos-label');
+  input?.addEventListener('change', () => {
+    const files = Array.from(input.files ?? []);
+    if (files.length > 5) { alert('Please choose up to 5 photos.'); input.value = ''; }
+    if (label) label.textContent = input.files?.length ? `${input.files.length} photo(s) selected` : 'Tap to add photos of the problem area';
+  });
+  document.getElementById('quote-form')?.addEventListener('submit', (e) => {
+    const btn = (e.currentTarget as HTMLFormElement).querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true; btn.textContent = 'Sending…';
+  });
+</script>

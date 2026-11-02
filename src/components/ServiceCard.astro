@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import type { Service } from '../data/services';
+import Icon from './Icon.astro';
+interface Props { service: Service }
+const { service } = Astro.props;
+---
+<a href={`/services/${service.slug}/`} class="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-brand-500/50 hover:shadow-xl hover:shadow-navy-900/5">
+  <div class="aspect-[16/10] overflow-hidden bg-slate-100">
+    <Image src={service.image} alt="" widths={[400, 640]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+  </div>
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="text-lg font-bold">{service.title}</h3>
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{service.summary}</p>
+    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">Learn more <Icon name="arrow" class="h-4 w-4 transition group-hover:translate-x-1" /></span>
+  </div>
+</a>

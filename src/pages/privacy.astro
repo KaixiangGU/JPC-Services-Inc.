@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+<Base title="Privacy Policy" description={`How ${site.name} collects, uses and protects your personal information.`}>
+  <PageHero title="Privacy Policy" crumbs={[{ label: 'Privacy Policy' }]} />
+  <section class="section">
+    <div class="container-x prose-jpc max-w-3xl">
+      <p>This policy describes how {site.name} (“JPC”, “we”, “us”) collects, uses and protects personal information when you use this website or contact us about our services. We handle personal information in accordance with British Columbia’s <em>Personal Information Protection Act</em> (PIPA).</p>
+      <h2>1. Information we collect</h2>
+      <p>We collect information you give us directly — for example when you request a quote, call or email us, or apply for a job. This may include your name, email address, phone number, job address, a description of your project, photos you upload, and your resume.</p>
+      <h2>2. How we use it</h2>
+      <ul>
+        <li>To respond to your enquiry and prepare quotes</li>
+        <li>To schedule, carry out and follow up on work</li>
+        <li>To review job applications</li>
+        <li>To improve our website and services</li>
+      </ul>
+      <h2>3. Sharing</h2>
+      <p>We do not sell, trade or rent your personal information. We share it only with service providers who help us run our business (such as our website host and email provider), or where required by law.</p>
+      <h2>4. Security and retention</h2>
+      <p>We take reasonable measures to protect your information against unauthorized access, disclosure or loss, and keep it only as long as needed for the purposes above or as required by law.</p>
+      <h2>5. Cookies</h2>
+      <p>This website does not use advertising or tracking cookies. The embedded Google Map on our contact page is provided by Google and is subject to Google’s privacy policy.</p>
+      <h2>6. Your rights</h2>
+      <p>You may ask to access or correct the personal information we hold about you, or withdraw your consent to its use, by contacting us.</p>
+      <h2>7. Contact</h2>
+      <p>Questions about this policy? Email <a class="text-brand-600 underline" href={`mailto:${site.email}`}>{site.email}</a> or call {site.phone}.</p>
+      <p class="text-sm">Last updated: November 2026</p>
+    </div>
+  </section>
+</Base>

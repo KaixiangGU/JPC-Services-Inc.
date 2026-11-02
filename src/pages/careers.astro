@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { jobs } from '../data/careers';
+import { site } from '../data/site';
+const applyHref = (title: string) =>
+  `mailto:${site.email}?subject=${encodeURIComponent(`Job application: ${title}`)}`;
+---
+<Base title="Careers" description="Join JPC Services Inc. — careers in construction, renovation, restoration, project management and more in Greater Vancouver.">
+  <PageHero eyebrow="Careers" title="Build your career with JPC" subtitle="A career at JPC is more than a job — it’s a chance to grow, lead and make a lasting impact." crumbs={[{ label: 'Careers' }]} />
+  <section class="section">
+    <div class="container-x grid gap-12 lg:grid-cols-3">
+      <div class="prose-jpc">
+        <h2 class="!mt-0">Why work with us</h2>
+        <p>From hands-on construction and renovation to project management and administration, we offer opportunities across multiple trades and specialties.</p>
+        <p>Whether you’re starting out as an apprentice or bringing years of experience, you’ll work on real projects with a team that values honesty, accountability and craftsmanship.</p>
+        <p>To apply, email your resume to <a class="font-semibold text-brand-600" href={`mailto:${site.email}`}>{site.email}</a> with the position in the subject line.</p>
+      </div>
+      <div class="lg:col-span-2">
+        <h2 class="text-2xl font-extrabold">Positions</h2>
+        <ul class="mt-6 space-y-4">
+          {jobs.map((j) => (
+            <li class="flex flex-col gap-4 rounded-2xl border border-slate-200 p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h3 class="text-lg font-bold">{j.title}</h3>
+                <p class="mt-0.5 text-xs font-semibold uppercase tracking-wider text-brand-600">{j.type} · Richmond, BC</p>
+                <p class="mt-2 text-sm text-muted">{j.summary}</p>
+              </div>
+              <a href={applyHref(j.title)} class="btn-navy shrink-0">Apply <Icon name="arrow" class="h-4 w-4" /></a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

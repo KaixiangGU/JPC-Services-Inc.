@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import Reviews from '../../components/Reviews.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, type Service } from '../../data/services';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props as { service: Service };
+const related = services.filter((s) => s.category === service.category && s.slug !== service.slug).slice(0, 3);
+const jsonLd = [{
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.summary,
+  provider: { '@id': `${site.url}/#business` },
+  areaServed: site.serviceArea.map((c) => ({ '@type': 'City', name: c })),
+}];
+---
+<Base title={`${service.title} in Vancouver & Richmond`} description={service.summary} jsonLd={jsonLd}>
+  <PageHero eyebrow="Service" title={service.title} subtitle={service.summary} crumbs={[{ label: 'Services', href: '/services/' }, { label: service.title }]}>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="/contact-us/" class="btn-primary px-8 py-4 text-base">Get a Free Quote</a>
+      <a href={site.phoneHref} class="btn-outline px-8 py-4 text-base"><Icon name="phone" class="h-5 w-5" /> {site.phone}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container-x grid gap-12 lg:grid-cols-2 lg:items-start">
+      <div>
+        <h2 class="text-3xl font-extrabold">How we help</h2>
+        <p class="mt-4 text-lg leading-relaxed text-muted">{service.intro}</p>
+        <h3 class="mt-8 text-lg font-bold">What’s included</h3>
+        <ul class="mt-4 space-y-3">
+          {service.includes.map((i) => (
+            <li class="flex gap-3"><span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-600"><Icon name="check" class="h-4 w-4" /></span><span>{i}</span></li>
+          ))}
+        </ul>
+        <div class="mt-10 rounded-2xl bg-sand p-6">
+          <p class="font-semibold text-navy-900">Serving Greater Vancouver</p>
+          <p class="mt-1 text-sm text-muted">{site.serviceArea.join(' · ')}</p>
+        </div>
+      </div>
+      <Image src={service.image} alt={service.title} widths={[600, 1000]} sizes="(min-width: 1024px) 600px, 100vw" class="aspect-[4/3] w-full rounded-3xl object-cover" />
+    </div>
+  </section>
+
+  <Reviews limit={3} />
+
+  {related.length > 0 && (
+    <section class="section">
+      <div class="container-x">
+        <h2 class="text-2xl font-extrabold sm:text-3xl">Related services</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map((s) => <ServiceCard service={s} />)}
+        </div>
+      </div>
+    </section>
+  )}
+  <CtaBand />
+</Base>

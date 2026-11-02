@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+const { project } = Astro.props as { project: Project };
+const facts = [
+  project.client && { label: 'Client', value: project.client },
+  { label: 'Location', value: project.location },
+  { label: 'Type', value: project.category },
+  { label: 'Contractor', value: 'JPC Services Inc.' },
+].filter(Boolean) as { label: string; value: string }[];
+---
+<Base title={project.title} description={project.summary}>
+  <PageHero eyebrow={project.category} title={project.title} subtitle={project.summary} crumbs={[{ label: 'Projects', href: '/projects/' }, { label: project.title }]} />
+  <section class="section">
+    <div class="container-x grid gap-12 lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        <div class="prose-jpc">{project.body.map((p) => <p class="!text-lg">{p}</p>)}</div>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {project.gallery.map((img) => (
+            <Image src={img} alt={project.title} widths={[500, 900]} sizes="(min-width: 1024px) 400px, 100vw" class="aspect-[4/3] w-full rounded-2xl object-cover" />
+          ))}
+        </div>
+      </div>
+      <aside class="h-fit rounded-2xl bg-sand p-6 lg:sticky lg:top-28">
+        <h2 class="text-lg font-bold">Project overview</h2>
+        <dl class="mt-4 space-y-4">
+          {facts.map((f) => (<div><dt class="text-xs font-semibold uppercase tracking-wider text-muted">{f.label}</dt><dd class="mt-0.5 font-medium text-navy-900">{f.value}</dd></div>))}
+        </dl>
+        <a href="/contact-us/" class="btn-primary mt-6 w-full">Start a similar project</a>
+      </aside>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

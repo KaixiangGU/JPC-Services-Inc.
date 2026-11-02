@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+<Base title="Terms of Use" description={`Terms of use for the ${site.name} website.`}>
+  <PageHero title="Terms of Use" crumbs={[{ label: 'Terms' }]} />
+  <section class="section">
+    <div class="container-x prose-jpc max-w-3xl">
+      <p>By using this website you agree to these terms. If you do not agree, please do not use the site.</p>
+      <h2>1. Website content</h2>
+      <p>The information on this site is provided for general purposes only. Service descriptions, photos and examples are illustrative and do not form a quote or contract. All work is subject to a written estimate or agreement between you and {site.name}.</p>
+      <h2>2. Quotes</h2>
+      <p>Submitting a quote request does not create an obligation for either party. Quotes are based on the information available at the time and may change after an on-site assessment.</p>
+      <h2>3. Intellectual property</h2>
+      <p>Unless otherwise noted, the content of this website — including text, logos, the JustPro name and Benny the Beaver — belongs to {site.name} and may not be reused without permission.</p>
+      <h2>4. Third-party links</h2>
+      <p>This site may link to third-party websites such as Google Maps. We are not responsible for their content or practices.</p>
+      <h2>5. Limitation of liability</h2>
+      <p>To the extent permitted by law, {site.name} is not liable for any loss arising from the use of this website or reliance on its content.</p>
+      <h2>6. Governing law</h2>
+      <p>These terms are governed by the laws of British Columbia and the federal laws of Canada applicable there.</p>
+      <h2>7. Contact</h2>
+      <p>Questions? Email <a class="text-brand-600 underline" href={`mailto:${site.email}`}>{site.email}</a> or call {site.phone}.</p>
+      <p class="text-sm">Last updated: November 2026</p>
+    </div>
+  </section>
+</Base>

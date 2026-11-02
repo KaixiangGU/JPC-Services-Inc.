@@ -1,0 +1,84 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description = site.description, image = '/og-image.jpg', noindex = false, jsonLd = [] } = Astro.props;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Water Damage & Renovation Experts in Greater Vancouver`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'GeneralContractor',
+  '@id': `${site.url}/#business`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/icon-512.png`,
+  image: ogImage,
+  telephone: '+1-778-888-8688',
+  email: site.email,
+  priceRange: '$$',
+  foundingDate: String(site.foundedYear),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  areaServed: site.serviceArea.map((c) => ({ '@type': 'City', name: c })),
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '17:00',
+  }],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0d223f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify([business, ...jsonLd])} />
+  </head>
+  <body class="flex min-h-screen flex-col pb-16 lg:pb-0">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <MobileCallBar />
+  </body>
+</html>

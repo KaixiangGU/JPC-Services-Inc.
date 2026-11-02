@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, yearsInBusiness } from '../data/site';
+import { services } from '../data/services';
+import { projects } from '../data/projects';
+import heroImg from '../assets/images/team-finished.jpg';
+import teamOnsite from '../assets/images/team-onsite.jpg';
+import benny from '../assets/images/benny.png';
+
+const featured = services.filter((s) => s.featured);
+const stats = [
+  { value: `${yearsInBusiness}+`, label: 'Years in business' },
+  { value: site.stats.projects, label: 'Projects completed' },
+  { value: site.stats.bbb, label: 'BBB rating' },
+  { value: `${site.stats.googleReviews}+`, label: 'Google reviews' },
+];
+const reasons = [
+  { icon: 'search', title: 'We find the real source', text: 'Thermal imaging, moisture meters and acoustic tools — we fix the cause, not just the symptom.' },
+  { icon: 'shield', title: 'Honest recommendations', text: 'We repair what needs repairing. No inflated scopes, no unnecessary replacements.' },
+  { icon: 'wrench', title: 'Quality materials', text: 'We choose materials for long-term performance, even when a cheaper option would pass.' },
+  { icon: 'users', title: 'One accountable team', text: 'Clear communication from first call to final clean-up, with regular updates on your project.' },
+] as const;
+---
+<Base>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-navy-900 text-white">
+    <Image src={heroImg} alt="" widths={[800, 1400, 2000]} sizes="100vw" class="absolute inset-0 h-full w-full object-cover opacity-30" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/90 to-navy-900/40" aria-hidden="true"></div>
+    <div class="container-x relative grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:py-32">
+      <div class="lg:col-span-7">
+        <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-white ring-1 ring-white/20">
+          <span class="flex text-amber-400">{[1,2,3,4,5].map(() => <Icon name="star" class="h-3.5 w-3.5" />)}</span>
+          Rated Excellent · {site.stats.googleReviews}+ Google reviews · A+ BBB
+        </p>
+        <h1 class="mt-6 text-4xl font-extrabold leading-[1.08] !text-white sm:text-5xl lg:text-6xl">
+          Vancouver’s water damage &amp; <span class="text-brand-500">renovation</span> experts
+        </h1>
+        <p class="mt-6 max-w-xl text-lg text-white/80">
+          Leak detection, flood restoration, renovations and strata maintenance — done right the first time by a team Greater Vancouver has trusted since {site.foundedYear}.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="/contact-us/" class="btn-primary px-8 py-4 text-base">Get a Free Quote <Icon name="arrow" class="h-4 w-4" /></a>
+          <a href={site.phoneHref} class="btn-outline px-8 py-4 text-base"><Icon name="phone" class="h-5 w-5" /> {site.phone}</a>
+        </div>
+        <ul class="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/75">
+          {['Residential & commercial', 'Free estimates', 'Fully managed projects'].map((t) => (
+            <li class="flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-brand-500" />{t}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="relative z-10 -mt-10">
+    <div class="container-x">
+      <dl class="grid grid-cols-2 overflow-hidden rounded-2xl bg-white shadow-xl shadow-navy-900/10 ring-1 ring-slate-200 lg:grid-cols-4">
+        {stats.map((s, i) => (
+          <div class:list={['p-6 text-center sm:p-8', i % 2 === 0 && 'border-r border-slate-200', i < 2 && 'border-b border-slate-200 lg:border-b-0', i === 1 && 'lg:border-r']}>
+            <dt class="sr-only">{s.label}</dt>
+            <dd class="font-display text-3xl font-extrabold text-navy-900 sm:text-4xl">{s.value}</dd>
+            <dd class="mt-1 text-sm text-muted">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container-x">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Our expertise</p>
+          <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">From a hidden leak to a full renovation</h2>
+          <p class="mt-4 text-muted">We combine skilled craftsmanship with years of experience — on time, on budget and built to last.</p>
+        </div>
+        <a href="/services/" class="inline-flex items-center gap-2 font-semibold text-brand-600 hover:text-navy-900">All {services.length} services <Icon name="arrow" class="h-4 w-4" /></a>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.slice(0, 6).map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- JustPro emergency band -->
+  <section class="bg-gradient-to-r from-alert to-[#b31d25] text-white">
+    <div class="container-x flex flex-col items-center gap-6 py-10 text-center md:flex-row md:text-left">
+      <Image src={benny} alt="Benny the Beaver, JustPro mascot" width={260} class="h-auto w-56 rounded-xl bg-white p-2" />
+      <div class="flex-1">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-white/80">JustPro Restoration</p>
+        <h2 class="mt-1 text-2xl font-extrabold !text-white sm:text-3xl">Water emergency? Stop it. Seal it. Save it.</h2>
+        <p class="mt-2 text-white/85">Our JustPro team handles leaks, floods and water damage — from source detection to full restoration.</p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href={site.phoneHref} class="btn bg-white px-6 py-3 text-alert hover:bg-white/90"><Icon name="phone" class="h-5 w-5" /> Call {site.phone}</a>
+        <a href="/justpro/" class="btn-outline">About JustPro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why choose -->
+  <section class="section">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2">
+      <div class="relative">
+        <Image src={teamOnsite} alt="JPC team reviewing plans on a job site" widths={[600, 900]} sizes="(min-width: 1024px) 600px, 100vw" class="aspect-[4/3] w-full rounded-3xl object-cover" />
+        <div class="absolute -bottom-6 right-6 rounded-2xl bg-brand-500 px-6 py-4 text-white shadow-lg sm:-right-6">
+          <p class="font-display text-3xl font-extrabold">{yearsInBusiness}+ yrs</p>
+          <p class="text-sm text-white/90">of solving tough home problems</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Why choose JPC</p>
+        <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">Trusted. Technology-driven. Above and beyond.</h2>
+        <p class="mt-4 text-muted">We solve problems at their source using advanced tools and proven techniques — delivering long-term protection and service that goes beyond expectations.</p>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          {reasons.map((r) => (
+            <div>
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-100 text-brand-600"><Icon name={r.icon} class="h-6 w-6" /></span>
+              <h3 class="mt-3 font-bold">{r.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-muted">{r.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container-x">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <p class="eyebrow">Recent work</p>
+          <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">Featured projects</h2>
+        </div>
+        <a href="/projects/" class="inline-flex items-center gap-2 font-semibold text-brand-600 hover:text-navy-900">View all projects <Icon name="arrow" class="h-4 w-4" /></a>
+      </div>
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        {projects.slice(0, 2).map((p) => (
+          <a href={`/projects/${p.slug}/`} class="group relative block overflow-hidden rounded-3xl">
+            <Image src={p.cover} alt={p.title} widths={[600, 900]} sizes="(min-width: 1024px) 600px, 100vw" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white">
+              <p class="text-xs font-bold uppercase tracking-wider text-brand-500">{p.category}</p>
+              <h3 class="mt-1 text-2xl font-bold !text-white">{p.title}</h3>
+              <p class="mt-1 text-sm text-white/75">{p.location}</p>
+            </div>
+          </a>
+        ))}
+        <div class="flex flex-col justify-center rounded-3xl border-2 border-dashed border-slate-200 p-8 text-center">
+          <p class="font-display text-xl font-bold text-navy-900">{site.stats.projects} projects and counting</p>
+          <p class="mt-2 text-muted">From townhouse leak repairs to supermarket build-outs across Greater Vancouver.</p>
+          <a href="/contact-us/" class="btn-navy mx-auto mt-6">Start your project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

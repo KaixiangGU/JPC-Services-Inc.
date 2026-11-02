@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, categories } from '../../data/services';
+
+const groups = (Object.keys(categories) as (keyof typeof categories)[]).map((key) => ({
+  key,
+  label: categories[key],
+  items: services.filter((s) => s.category === key),
+}));
+---
+<Base title="Services" description="Water leak detection, flood restoration, waterproofing, renovations, strata maintenance, roofing, plumbing and more across Greater Vancouver.">
+  <PageHero eyebrow="Our services" title="Full-service repair, restoration and renovation" subtitle="From planning to completion, every project is managed with a comprehensive, full-service approach." crumbs={[{ label: 'Services' }]} />
+  {groups.map((g) => (
+    <section class="py-14 first-of-type:pt-16 odd:bg-white even:bg-sand">
+      <div class="container-x">
+        <h2 class="text-2xl font-extrabold sm:text-3xl">{g.label}</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {g.items.map((s) => <ServiceCard service={s} />)}
+        </div>
+      </div>
+    </section>
+  ))}
+  <CtaBand title="Not sure what you need?" text="Describe the problem — we’ll help you figure out the right fix, and give you a free quote." />
+</Base>
