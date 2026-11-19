@@ -1,0 +1,25 @@
+---
+// Prominent Google reviews badge. variant "card" = white card, "dark" = on navy.
+import Icon from './Icon.astro';
+import GoogleLogo from './GoogleLogo.astro';
+import { site } from '../data/site';
+interface Props { variant?: 'card' | 'dark'; class?: string }
+const { variant = 'card', class: cls = '' } = Astro.props;
+const dark = variant === 'dark';
+const score = site.stats.googleRating;
+---
+<a href={site.mapsUrl} target="_blank" rel="noopener"
+   class:list={['group inline-flex items-center gap-4 rounded-xl', dark ? 'text-white' : 'bg-white p-4 pr-6 text-navy-900 shadow-xl shadow-navy-950/20', cls]}
+   aria-label={`Rated ${score ?? 'Excellent'} on Google from ${site.stats.googleReviews}+ reviews`}>
+  <span class:list={['grid h-14 w-14 shrink-0 place-items-center rounded-full', dark ? 'bg-white' : 'bg-sand']}><GoogleLogo class="h-8 w-8" /></span>
+  <span>
+    <span class="flex items-center gap-2">
+      <span class="font-display text-3xl font-bold leading-none">{score ?? 'EXCELLENT'}</span>
+      <span class="flex text-accent-500">{[1, 2, 3, 4, 5].map(() => <Icon name="star" class="h-5 w-5" />)}</span>
+    </span>
+    <span class:list={['mt-1 block text-sm', dark ? 'text-white/80' : 'text-muted']}>
+      <strong class={dark ? 'text-white' : 'text-navy-900'}>{site.stats.googleReviews}+ Google reviews</strong>
+      <span class="ml-1 underline-offset-2 group-hover:underline">· Read reviews</span>
+    </span>
+  </span>
+</a>

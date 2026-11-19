@@ -17,6 +17,8 @@ export default defineConfig({
     '/my-account/': '/',
     '/hello-world/': '/',
     '/delivering-excellence-through-innovative-solutions/': '/',
+    '/justpro/': '/services/flood-damage-control/',
+    '/careers/': '/contact-us/',
   },
   integrations: [
     sitemap({ filter: (page) => !page.includes('/thank-you/') }),

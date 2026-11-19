@@ -20,7 +20,6 @@ Most updates mean editing one file in `src/data/`:
 | Services (title, text, photo) | `src/data/services.ts` |
 | Projects | `src/data/projects.ts` (photos in `src/assets/images/projects/`) |
 | Google reviews shown on the site | `src/data/reviews.ts` |
-| Job openings | `src/data/careers.ts` |
 
 Pages are in `src/pages/`, shared pieces (header, footer, etc.) in `src/components/`.
 
@@ -31,9 +30,9 @@ Pages are in `src/pages/`, shared pieces (header, footer, etc.) in `src/componen
 
 ## Pages
 
-`/` · `/services/` (+ one page per service) · `/projects/` (+ one page per project) · `/about/` · `/justpro/` · `/careers/` · `/contact-us/` · `/privacy/` · `/terms/` · `/thank-you/` · `404`
+`/` · `/services/` (+ one page per service) · `/projects/` (+ one page per project) · `/about/` · `/contact-us/` · `/privacy/` · `/terms/` · `/thank-you/` · `404`
 
-Old WordPress URLs (`/sungiven/`, `/shop/`, `/cart/`, …) are 301-redirected — see `public/.htaccess` and `astro.config.mjs`.
+Old URLs (`/sungiven/`, `/justpro/`, `/careers/`, `/shop/`, …) are 301-redirected — see `public/.htaccess` and `astro.config.mjs`.
 
 ## Quote form
 

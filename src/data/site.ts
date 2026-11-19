@@ -2,7 +2,6 @@
 export const site = {
   name: 'JPC Services Inc.',
   shortName: 'JPC Services',
-  tagline: 'Yes We Do.',
   url: 'https://jpcservicesinc.com',
   description:
     "Greater Vancouver's trusted team for water damage restoration, leak detection, renovations and strata maintenance. A+ BBB rated. Free quotes.",
@@ -28,6 +27,8 @@ export const site = {
     team: '10+',
     bbb: 'A+',
     googleReviews: 137,
+    // TODO(confirm with JPC): exact Google star rating, e.g. '4.9'. Leave null to show "Excellent".
+    googleRating: null as string | null,
   },
   serviceArea: [
     'Vancouver', 'Richmond', 'Burnaby', 'North Vancouver', 'West Vancouver',
@@ -48,6 +49,5 @@ export const nav = [
   { label: 'Services', href: '/services/' },
   { label: 'Projects', href: '/projects/' },
   { label: 'About', href: '/about/' },
-  { label: 'JustPro', href: '/justpro/' },
-  { label: 'Careers', href: '/careers/' },
+  { label: 'Contact', href: '/contact-us/' },
 ];

@@ -14,6 +14,8 @@ Options -Indexes
   # Old WordPress URLs -> new pages (keeps Google rankings and old links working)
   RewriteRule ^sungiven/?$ /projects/sungiven-foods-supermarket/ [L,R=301]
   RewriteRule ^home-copy-copy/?$ / [L,R=301]
+  RewriteRule ^justpro/?$ /services/flood-damage-control/ [L,R=301]
+  RewriteRule ^careers/?$ /contact-us/ [L,R=301]
   RewriteRule ^(shop|cart|checkout|my-account|hello-world|delivering-excellence-through-innovative-solutions)/?$ / [L,R=301]
   RewriteRule ^(category|author|tag)/ / [L,R=301]
   RewriteRule ^(feed|comments/feed)/?$ / [L,R=301]

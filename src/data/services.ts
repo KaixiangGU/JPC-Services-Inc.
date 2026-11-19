@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import residential from '../assets/images/services/residential-renovation.jpg';
 import commercial from '../assets/images/services/commercial-renovation.jpg';
-import general from '../assets/images/services/general-contracting.png';
+import general from '../assets/images/services/general-contracting.jpg';
 import crack from '../assets/images/services/concrete-crack-injection.jpg';
 import leak from '../assets/images/services/water-leak-detection.jpg';
 import flood from '../assets/images/services/flood-damage-control.jpg';
@@ -49,7 +49,7 @@ export const services: Service[] = [
     summary:
       'Fast flood response: water extraction, drying and structural repairs to make your property safe again and prevent future damage.',
     intro:
-      'When water gets in, speed matters. Our JustPro restoration team extracts water, dries the structure and rebuilds the damaged areas — restoring safety and preventing mold and long-term damage.',
+      'When water gets in, speed matters. Our restoration team extracts water, dries the structure and rebuilds the damaged areas — restoring safety and preventing mold and long-term damage.',
     includes: [
       'Emergency water extraction',
       'Structural drying and moisture monitoring',
