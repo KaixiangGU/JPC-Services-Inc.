@@ -81,5 +81,19 @@ const business = {
     </main>
     <Footer />
     <MobileCallBar />
+    <script>
+      // Refresh Google rating + review count from our cached server endpoint.
+      fetch('/api/google-rating', { headers: { Accept: 'application/json' } })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => {
+          if (!d || typeof d.rating !== 'string' || typeof d.count !== 'number') return;
+          document.querySelectorAll('[data-g-rating]').forEach((el) => (el.textContent = d.rating));
+          document.querySelectorAll('[data-g-count]').forEach((el) => (el.textContent = String(d.count)));
+          if (typeof d.url === 'string' && d.url.startsWith('https://')) {
+            document.querySelectorAll<HTMLAnchorElement>('a[data-g-url]').forEach((a) => (a.href = d.url));
+          }
+        })
+        .catch(() => {});
+    </script>
   </body>
 </html>

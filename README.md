@@ -19,7 +19,7 @@ Most updates mean editing one file in `src/data/`:
 | Phone, email, address, hours, stats, founding year | `src/data/site.ts` |
 | Services (title, text, photo) | `src/data/services.ts` |
 | Projects | `src/data/projects.ts` (photos in `src/assets/images/projects/`) |
-| Google reviews shown on the site | `src/data/reviews.ts` |
+| Google reviews shown on the site | `src/data/reviews.ts` (the star rating and count update live — see `GOOGLE_REVIEWS.md`) |
 
 Pages are in `src/pages/`, shared pieces (header, footer, etc.) in `src/components/`.
 

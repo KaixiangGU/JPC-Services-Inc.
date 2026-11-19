@@ -10,10 +10,13 @@
   --color-brand-600: #1d4ed8;
   --color-brand-500: #2563eb;
   --color-brand-100: #e8efff;
-  /* Accent yellow for main calls to action */
-  --color-accent-500: #ffc928;
-  --color-accent-600: #f2b500;
-  --color-accent-100: #fff6d6;
+  /* Accent green, matched to the JPC logo (#22b04a) */
+  --color-accent-500: #22b04a;
+  --color-accent-600: #178a3a;
+  --color-accent-700: #12722f;
+  --color-accent-100: #e4f6e9;
+  /* Google star gold */
+  --color-star: #fbbc04;
   --color-ink: #121a33;
   --color-muted: #5a6378;
   --color-sand: #f2f5fb;
@@ -30,7 +33,7 @@
 
 @utility container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
 @utility btn { @apply inline-flex items-center justify-center gap-2.5 rounded-md px-5 py-3 text-sm font-bold transition-colors duration-150; }
-@utility btn-primary { @apply btn bg-accent-500 text-navy-950 hover:bg-accent-600; }
+@utility btn-primary { @apply btn bg-accent-600 text-white hover:bg-accent-700; }
 @utility btn-outline { @apply btn border border-white/50 text-white hover:bg-white/10; }
 @utility btn-navy { @apply btn bg-navy-900 text-white hover:bg-navy-800; }
 @utility btn-blue { @apply btn bg-brand-500 text-white hover:bg-brand-600; }

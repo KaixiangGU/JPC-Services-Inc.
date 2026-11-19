@@ -26,9 +26,9 @@ export const site = {
     projects: '550+',
     team: '10+',
     bbb: 'A+',
-    googleReviews: 137,
-    // TODO(confirm with JPC): exact Google star rating, e.g. '4.9'. Leave null to show "Excellent".
-    googleRating: null as string | null,
+    // Fallback Google numbers (Nov 2026). The live values are fetched from Google — see GOOGLE_REVIEWS.md.
+    googleReviews: 154,
+    googleRating: '5.0',
   },
   serviceArea: [
     'Vancouver', 'Richmond', 'Burnaby', 'North Vancouver', 'West Vancouver',

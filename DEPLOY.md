@@ -9,6 +9,9 @@ The domain and DNS **do not change** — we only replace the files the server se
 3. **Back up WordPress**: Plesk → *WordPress* → *Back up*, or *Backup Manager* → full backup. Download it.
 4. Create a mailbox or alias `noreply@jpcservicesinc.com` (Plesk → Mail) so form emails are sent from our own domain (better delivery). The form sends to `jeffpartners@gmail.com` — change `$TO_EMAIL` in `public/contact.php` if needed.
 
+## Live Google rating
+Follow `GOOGLE_REVIEWS.md` step 4 to add the Google API key outside `httpdocs`.
+
 ## Deploy
 1. On your computer: `npm install && npm run build`.
 2. In Plesk → *Files* → `httpdocs/`: move the existing WordPress files into a folder **outside** `httpdocs` (e.g. `wordpress-old/`) so they can be restored.
@@ -19,6 +22,9 @@ The domain and DNS **do not change** — we only replace the files the server se
 Plesk → *Websites & Domains* → *Apache & nginx Settings* → **Additional nginx directives**:
 
 ```nginx
+location = /api/google-rating { rewrite ^ /api/google-rating.php last; }
+location = /justpro/ { return 301 /services/flood-damage-control/; }
+location = /careers/ { return 301 /contact-us/; }
 location = /sungiven/ { return 301 /projects/sungiven-foods-supermarket/; }
 location = /home-copy-copy/ { return 301 /; }
 location ~ ^/(shop|cart|checkout|my-account|hello-world|delivering-excellence-through-innovative-solutions)/?$ { return 301 /; }

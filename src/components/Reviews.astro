@@ -3,10 +3,11 @@ import Icon from './Icon.astro';
 import GoogleLogo from './GoogleLogo.astro';
 import GoogleBadge from './GoogleBadge.astro';
 import { reviews } from '../data/reviews';
-import { site } from '../data/site';
+import { getGoogleStats } from '../lib/google';
 interface Props { limit?: number }
 const { limit = 6 } = Astro.props;
 const list = reviews.slice(0, limit);
+const g = await getGoogleStats();
 ---
 <section class="section bg-sand">
   <div class="container-x">
@@ -21,7 +22,7 @@ const list = reviews.slice(0, limit);
       {list.map((r) => (
         <figure class="mb-6 break-inside-avoid rounded-xl bg-white p-7 shadow-sm ring-1 ring-slate-900/5">
           <div class="flex items-center justify-between">
-            <div class="flex text-accent-500">{[1, 2, 3, 4, 5].map(() => <Icon name="star" class="h-5 w-5" />)}</div>
+            <div class="flex text-star">{[1, 2, 3, 4, 5].map(() => <Icon name="star" class="h-5 w-5" />)}</div>
             <GoogleLogo class="h-5 w-5" />
           </div>
           <blockquote class="mt-4 text-[15px] leading-relaxed text-ink" lang={r.lang === 'zh' ? 'zh' : undefined}>“{r.text}”</blockquote>
@@ -33,7 +34,7 @@ const list = reviews.slice(0, limit);
       ))}
     </div>
     <div class="mt-4 text-center">
-      <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn-navy">Read all {site.stats.googleReviews}+ reviews on Google <Icon name="arrowUp" class="h-4 w-4" /></a>
+      <a href={g.url} data-g-url target="_blank" rel="noopener" class="btn-navy">Read all <span data-g-count>{g.count}</span> reviews on Google <Icon name="arrowUp" class="h-4 w-4" /></a>
     </div>
   </div>
 </section>
