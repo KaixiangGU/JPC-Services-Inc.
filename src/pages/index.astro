@@ -11,15 +11,15 @@ import { services } from '../data/services';
 import { projects } from '../data/projects';
 import { getGoogleStats } from '../lib/google';
 const g = await getGoogleStats();
-import heroImg from '../assets/images/team-finished.jpg';
+// Hero photo: Unsplash (free licence), photo-1621905251189-08b45d6a269e
+import heroImg from '../assets/images/hero-worker.jpg';
 import teamOnsite from '../assets/images/team-onsite.jpg';
 
 const featured = services.filter((s) => s.featured).slice(0, 6);
 const stats = [
   { value: `${yearsInBusiness}+`, label: 'Years of experience' },
-  { value: site.stats.projects, label: 'Projects completed' },
   { value: site.stats.bbb, label: 'BBB rating' },
-  { value: String(g.count), label: 'Google reviews', live: true },
+  { value: '5', label: 'Star Google reviews', star: true },
 ];
 const reasons = [
   { icon: 'search', title: 'We find the real source', text: 'Thermal imaging, moisture meters and acoustic tools — we fix the cause, not just the symptom.' },
@@ -31,7 +31,7 @@ const reasons = [
 <Base>
   <!-- ===== Hero ===== -->
   <section class="relative overflow-hidden bg-navy-900">
-    <Image src={heroImg} alt="The JPC Services team on a completed project" widths={[800, 1400, 2000]} sizes="(min-width: 1024px) 64vw, 100vw" class="absolute inset-0 h-full w-full object-cover object-[65%_center] lg:left-auto lg:right-0 lg:w-[64%]" loading="eager" fetchpriority="high" />
+    <Image src={heroImg} alt="Contractor in a hard hat working on a wall" widths={[800, 1400, 2000]} sizes="(min-width: 1024px) 64vw, 100vw" class="absolute inset-0 h-full w-full object-cover object-[40%_center] lg:left-auto lg:right-0 lg:w-[64%]" loading="eager" fetchpriority="high" />
     <div class="absolute inset-0 bg-gradient-to-b from-navy-950/75 via-navy-900/55 to-navy-900/95 lg:hidden" aria-hidden="true"></div>
     <div class="absolute inset-0 hidden lg:block" style="background: linear-gradient(90deg, var(--color-navy-900) 0%, var(--color-navy-900) 36%, color-mix(in srgb, var(--color-navy-900) 55%, transparent) 46%, transparent 60%);" aria-hidden="true"></div>
 
@@ -72,10 +72,10 @@ const reasons = [
         <Image src={teamOnsite} alt="JPC team reviewing plans on a job site" widths={[600, 1000]} sizes="(min-width: 1024px) 600px, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" />
         <div>
           <p class="text-lg leading-relaxed text-muted">For {yearsInBusiness}+ years, JPC Services has combined skilled craftsmanship with advanced diagnostic tools. From hidden leaks to full renovations, we bring the same honesty, care and attention to detail to every job — on time and on budget.</p>
-          <dl class="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-slate-200 pt-8">
+          <dl class="mt-8 grid grid-cols-3 gap-x-6 gap-y-8 border-t border-slate-200 pt-8">
             {stats.map((s) => (
               <div>
-                <dd class="font-display text-5xl font-bold text-navy-900" data-g-count={s.live ? '' : undefined}>{s.value}</dd>
+                <dd class="flex items-center gap-1.5 font-display text-5xl font-bold text-navy-900">{s.value}{s.star && <Icon name="star" class="h-9 w-9 text-star" />}</dd>
                 <dt class="mt-1 text-sm text-muted">{s.label}</dt>
               </div>
             ))}
