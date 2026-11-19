@@ -9,12 +9,21 @@ import { site, yearsInBusiness } from '../data/site';
 import teamOnsite from '../assets/images/team-onsite.jpg';
 import teamFinished from '../assets/images/team-finished.jpg';
 import badges from '../assets/images/badges.png';
+import jeff from '../assets/images/jeff-jiang.jpg';
 
 const values = [
   { icon: 'shield', title: 'Honesty', text: 'We are transparent, truthful and fair in every interaction — earning trust through open communication and ethical work.' },
   { icon: 'check', title: 'Accountability', text: 'We take ownership of our work, follow through on our promises, and hold ourselves to the highest standards of professionalism.' },
   { icon: 'wrench', title: 'Craftsmanship', text: 'Every project is a reflection of our name. From small repairs to large renovations, we bring precision, care and pride to every detail.' },
 ] as const;
+const highlights = [
+  '20+ years of construction, safety and project management experience',
+  'Bachelor’s degree in Mechanical Engineering',
+  'Founder and three-term President of the Chinese Construction & Renovation Association of Canada (CCRAC)',
+  'Two-time President of the Vancouver Sunshine Lions Club',
+  'Candidate for Richmond City Council, 2026',
+  'Recipient of the King Charles III Coronation Medal',
+];
 const stats = [
   { value: `${yearsInBusiness}+`, label: 'Years of experience' },
   { value: site.stats.team, label: 'Team members' },
@@ -25,7 +34,50 @@ const stats = [
 <Base title="About Us" description={`Since ${site.foundedYear}, JPC Services Inc. has served Greater Vancouver with honest, high-quality repair, restoration and renovation work. A+ BBB rated, founding member of CCRAC.`}>
   <PageHero eyebrow="About us" title="Committed to excellence since day one" subtitle="A reputation built on quality, integrity and trust across Greater Vancouver." crumbs={[{ label: 'About' }]} image={teamFinished} />
 
+  <!-- ===== Founder & President ===== -->
   <section class="section">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <div class="relative">
+          <Image src={jeff} alt="Jeff Jiang, Founder and President of JPC Services Inc., wearing the King Charles III Coronation Medal" widths={[480, 800, 1100]} sizes="(min-width: 1024px) 480px, 100vw" class="aspect-[4/5] w-full rounded-xl object-cover object-top shadow-2xl shadow-navy-900/15" loading="eager" />
+          <div class="relative mx-4 -mt-8 flex items-center gap-4 rounded-xl bg-navy-900 p-4 text-white shadow-xl sm:mx-6">
+            <svg viewBox="0 0 40 56" class="h-14 w-10 shrink-0" aria-hidden="true">
+              <path d="M8 0h24v18l-12 8-12-8z" fill="#1d2f6f" />
+              <path d="M17 0h6v22l-3 2-3-2z" fill="#d7262f" />
+              <path d="M15 0h2v20.7l-2-1.3zM23 0h2v19.4l-2 1.3z" fill="#fff" />
+              <circle cx="20" cy="40" r="14" fill="#c9ced6" stroke="#eef1f5" stroke-width="2" />
+              <circle cx="20" cy="40" r="9" fill="none" stroke="#9aa2ad" stroke-width="1.2" />
+            </svg>
+            <p class="leading-tight">
+              <span class="block font-display text-xl font-bold uppercase">King Charles III Coronation Medal</span>
+              <span class="block text-sm text-white/75">Recipient, in recognition of service to community and country</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 lg:col-span-7 lg:pt-0">
+        <p class="eyebrow">Founder &amp; President</p>
+        <h2 class="mt-5 text-5xl sm:text-6xl">Jeff Jiang <span lang="zh" class="font-sans font-bold normal-case">蒋浩</span></h2>
+        <p class="mt-3 text-lg font-semibold text-accent-600">Professional General Contractor · King Charles III Coronation Medal Recipient</p>
+        <p class="mt-4 inline-block rounded-md border border-slate-200 bg-sand px-3 py-1.5 text-sm font-semibold text-navy-900">Construction · Small Business · Community Leadership</p>
+
+        <div class="prose-jpc mt-8 text-[17px]">
+          <p>Jeff Jiang is the founder and president of JPC Services Inc. and a professional general contractor with more than two decades of experience in construction, safety and project management across Richmond and the Lower Mainland. With a Bachelor’s degree in Mechanical Engineering, he brings an engineer’s approach to every job — finding the true cause of a problem and solving it properly, especially the difficult issues larger firms often avoid.</p>
+          <p>A Richmond resident and long-time Richmond business owner, Jeff is equally committed to his community. He is the Founder and three-term President of the <strong class="text-navy-900">Chinese Construction &amp; Renovation Association of Canada (CCRAC)</strong>, working to raise standards across the industry, and has twice served as President of the <strong class="text-navy-900">Vancouver Sunshine Lions Club</strong>. In recognition of his service to community and country, Jeff was awarded the <strong class="text-navy-900">King Charles III Coronation Medal</strong>.</p>
+          <p>In 2026, Jeff stood as a candidate for <strong class="text-navy-900">Richmond City Council</strong>, advocating for stronger support for local entrepreneurs, faster and simpler permit approvals, and residential and commercial construction built to the highest standards of safety, quality and environmental sustainability — the same principles he brings to every JPC project.</p>
+        </div>
+
+        <ul class="mt-8 grid gap-3 rounded-xl bg-sand p-6 sm:grid-cols-2">
+          {highlights.map((h) => (
+            <li class="flex gap-3 text-sm text-navy-900"><span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-500 text-white"><Icon name="check" class="h-3.5 w-3.5" /></span>{h}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-sand">
     <div class="container-x grid items-center gap-12 lg:grid-cols-2">
       <div class="prose-jpc">
         <p class="eyebrow">Who we are</p>
@@ -60,21 +112,6 @@ const stats = [
             <p class="mt-2 leading-relaxed text-muted">{v.text}</p>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section bg-sand">
-    <div class="container-x grid items-center gap-12 lg:grid-cols-2">
-      <Image src={teamFinished} alt="Jeff Jiang with the JPC team on a completed project" widths={[600, 1000]} sizes="(min-width: 1024px) 600px, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" />
-      <div>
-        <p class="eyebrow">Founder &amp; President</p>
-        <h2 class="mt-5 text-5xl sm:text-6xl">Jeff Jiang</h2>
-        <div class="prose-jpc mt-4">
-          <p>Jeff is the dedicated force behind JPC. He specializes in tackling challenging home issues — offering solutions where larger firms shy away.</p>
-          <p>His commitment to integrity and excellence shows in his meticulous approach to every project. With an extensive background in resolving complex home problems, he excels at problem-solving and creative solutions.</p>
-          <p>Jeff’s dedication to both his clients and his team defines how JPC works. Experience the difference — where expertise meets passion.</p>
-        </div>
       </div>
     </div>
   </section>
