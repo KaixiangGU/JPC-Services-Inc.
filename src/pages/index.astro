@@ -11,8 +11,8 @@ import { services } from '../data/services';
 import { projects } from '../data/projects';
 import { getGoogleStats } from '../lib/google';
 const g = await getGoogleStats();
-// Hero photo: Unsplash (free licence), photo-1621905251189-08b45d6a269e
-import heroImg from '../assets/images/hero-worker.jpg';
+// Hero photo: Unsplash (free licence), photo-1568605114967-8130f3a36994
+import heroImg from '../assets/images/hero-house.jpg';
 import teamOnsite from '../assets/images/team-onsite.jpg';
 
 const featured = services.filter((s) => s.featured).slice(0, 6);
@@ -31,7 +31,7 @@ const reasons = [
 <Base>
   <!-- ===== Hero ===== -->
   <section class="relative overflow-hidden bg-navy-900">
-    <Image src={heroImg} alt="Contractor in a hard hat working on a wall" widths={[800, 1400, 2000]} sizes="(min-width: 1024px) 64vw, 100vw" class="absolute inset-0 h-full w-full object-cover object-[40%_center] lg:left-auto lg:right-0 lg:w-[64%]" loading="eager" fetchpriority="high" />
+    <Image src={heroImg} alt="Wood-sided West Coast house at dusk" widths={[800, 1400, 2000]} sizes="(min-width: 1024px) 64vw, 100vw" class="absolute inset-0 h-full w-full object-cover object-[40%_center] lg:left-auto lg:right-0 lg:w-[64%]" loading="eager" fetchpriority="high" />
     <div class="absolute inset-0 bg-gradient-to-b from-navy-950/75 via-navy-900/55 to-navy-900/95 lg:hidden" aria-hidden="true"></div>
     <div class="absolute inset-0 hidden lg:block" style="background: linear-gradient(90deg, var(--color-navy-900) 0%, var(--color-navy-900) 36%, color-mix(in srgb, var(--color-navy-900) 55%, transparent) 46%, transparent 60%);" aria-hidden="true"></div>
 
