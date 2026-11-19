@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import heroImg from '../assets/images/services/strata-maintenance.jpg';
 import { site } from '../data/site';
 ---
 <Base title="Terms of Use" description={`Terms of use for the ${site.name} website.`}>
-  <PageHero title="Terms of Use" crumbs={[{ label: 'Terms' }]} />
+  <PageHero title="Terms of Use" crumbs={[{ label: 'Terms' }]} image={heroImg} />
   <section class="section">
     <div class="container-x prose-jpc max-w-3xl">
       <p>By using this website you agree to these terms. If you do not agree, please do not use the site.</p>

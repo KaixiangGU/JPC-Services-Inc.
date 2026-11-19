@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import contactImg from '../assets/images/team-onsite.jpg';
 import Icon from '../components/Icon.astro';
 import { site, phones } from '../data/site';
 
@@ -11,7 +12,7 @@ const serviceTypes = ['Water leak', 'Water damage / restoration', 'Home renovati
 const sources = ['Family / friend referral', 'Google', 'Xiaohongshu (小红书)', 'BBB', 'Company vehicle', 'Job site sign', 'Other'];
 ---
 <Base title="Contact Us — Get a Free Quote" description={`Get a free quote from JPC Services Inc. Call ${site.phone} or ${site.phone2}, or send us your project details. Richmond, BC — serving Greater Vancouver.`}>
-  <PageHero eyebrow="Contact us" title="Get a free quote" subtitle="Tell us about your project — a few details and a photo help us give you an accurate quote." crumbs={[{ label: 'Contact Us' }]} />
+  <PageHero eyebrow="Contact us" title="Get a free quote" subtitle="Tell us about your project — a few details and a photo help us give you an accurate quote." crumbs={[{ label: 'Contact Us' }]} image={contactImg} />
 
   <section class="section">
     <div class="container-x grid gap-12 lg:grid-cols-5">

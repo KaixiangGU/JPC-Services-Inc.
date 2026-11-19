@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import heroImg from '../assets/images/services/strata-maintenance.jpg';
 import { site } from '../data/site';
 ---
 <Base title="Privacy Policy" description={`How ${site.name} collects, uses and protects your personal information.`}>
-  <PageHero title="Privacy Policy" crumbs={[{ label: 'Privacy Policy' }]} />
+  <PageHero title="Privacy Policy" crumbs={[{ label: 'Privacy Policy' }]} image={heroImg} />
   <section class="section">
     <div class="container-x prose-jpc max-w-3xl">
       <p>This policy describes how {site.name} (“JPC”, “we”, “us”) collects, uses and protects personal information when you use this website or contact us about our services. We handle personal information in accordance with British Columbia’s <em>Personal Information Protection Act</em> (PIPA).</p>

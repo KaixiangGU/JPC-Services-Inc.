@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import heroImg from '../assets/images/team-finished.jpg';
 import Icon from '../components/Icon.astro';
 import { phones } from '../data/site';
 ---
 <Base title="Thank You" noindex>
-  <PageHero eyebrow="Request received" title="Thank you — we’ve got your request" subtitle="Our team will review the details and contact you soon. If it’s urgent, please call us directly.">
+  <PageHero eyebrow="Request received" title="Thank you — we’ve got your request" subtitle="Our team will review the details and contact you soon. If it’s urgent, please call us directly." image={heroImg}>
     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
       {phones.map((p) => <a href={p.href} class="btn-primary py-4 text-base"><span class="btn-icon"><Icon name="phone" class="h-4 w-4" /></span>{p.number}</a>)}
       <a href="/" class="btn-outline py-4 text-base">Back to home</a>

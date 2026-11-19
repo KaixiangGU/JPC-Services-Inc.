@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import heroImg from '../../assets/images/services/residential-renovation.jpg';
 import ServiceCard from '../../components/ServiceCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services, categories } from '../../data/services';
@@ -12,7 +13,7 @@ const groups = (Object.keys(categories) as (keyof typeof categories)[]).map((key
 }));
 ---
 <Base title="Services" description="Water leak detection, flood restoration, waterproofing, renovations, strata maintenance, roofing, plumbing and more across Greater Vancouver.">
-  <PageHero eyebrow="Our services" title="Full-service repair, restoration and renovation" subtitle="From planning to completion, every project is managed with a comprehensive, full-service approach." crumbs={[{ label: 'Services' }]} />
+  <PageHero eyebrow="Our services" title="Full-service repair, restoration and renovation" subtitle="From planning to completion, every project is managed with a comprehensive, full-service approach." crumbs={[{ label: 'Services' }]} image={heroImg} />
   {groups.map((g) => (
     <section class="py-14 first-of-type:pt-16 odd:bg-white even:bg-sand">
       <div class="container-x">

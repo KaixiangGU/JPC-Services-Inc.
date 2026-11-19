@@ -38,8 +38,8 @@
 @utility btn-navy { @apply btn bg-navy-900 text-white hover:bg-navy-800; }
 @utility btn-blue { @apply btn bg-brand-500 text-white hover:bg-brand-600; }
 @utility btn-icon { @apply grid h-6 w-6 place-items-center rounded bg-white text-navy-950; }
-@utility eyebrow { @apply inline-block rounded-md border border-navy-900 px-2.5 py-1 font-display text-xs font-bold uppercase tracking-wider text-navy-900; }
-@utility eyebrow-light { @apply inline-block rounded-md border border-white/60 px-2.5 py-1 font-display text-xs font-bold uppercase tracking-wider text-white; }
+@utility eyebrow { @apply inline-block rounded-md border-[1.5px] border-navy-900 px-3.5 py-1.5 font-display text-base font-bold uppercase tracking-wider text-navy-900 sm:text-lg; }
+@utility eyebrow-light { @apply inline-block rounded-md border-[1.5px] border-white/70 px-3.5 py-1.5 font-display text-base font-bold uppercase tracking-wider text-white sm:text-lg; }
 @utility section { @apply py-16 sm:py-24; }
 @utility field { @apply block w-full rounded-md border border-slate-200 bg-sand px-4 py-3 text-ink placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-500/20 focus:outline-none; }
 @utility label { @apply mb-1.5 block text-sm font-semibold text-navy-900; }

@@ -6,7 +6,7 @@ const { eyebrow, title, subtitle, crumbs = [], image } = Astro.props;
 ---
 <section class="relative overflow-hidden bg-navy-900 text-white">
   {image && <Image src={image} alt="" widths={[800, 1600]} sizes="100vw" class="absolute inset-0 h-full w-full object-cover" loading="eager" />}
-  <div class:list={['absolute inset-0', image ? 'bg-gradient-to-r from-navy-950/95 via-navy-900/80 to-navy-900/30' : 'bg-gradient-to-br from-navy-950 to-navy-800']} aria-hidden="true"></div>
+  <div class:list={['absolute inset-0', image ? 'bg-gradient-to-r from-navy-950/90 via-navy-900/65 to-navy-900/15' : 'bg-gradient-to-br from-navy-950 to-navy-800']} aria-hidden="true"></div>
   <div class="container-x relative pb-14 pt-32 sm:pb-20 lg:pt-44">
     {crumbs.length > 0 && (
       <nav aria-label="Breadcrumb" class="mb-5 text-sm text-white/70">

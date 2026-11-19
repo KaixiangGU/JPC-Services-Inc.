@@ -2,13 +2,14 @@
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import heroImg from '../../assets/images/projects/sungiven-2.jpg';
 import Reviews from '../../components/Reviews.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { projects } from '../../data/projects';
 import { site } from '../../data/site';
 ---
 <Base title="Projects" description="Recent renovation, restoration and construction projects by JPC Services Inc. across Greater Vancouver.">
-  <PageHero eyebrow="Our work" title="Projects" subtitle={`${site.stats.projects} projects completed across Greater Vancouver — homes, strata buildings, restaurants and retail.`} crumbs={[{ label: 'Projects' }]} />
+  <PageHero eyebrow="Our work" title="Projects" subtitle={`${site.stats.projects} projects completed across Greater Vancouver — homes, strata buildings, restaurants and retail.`} crumbs={[{ label: 'Projects' }]} image={heroImg} />
   <section class="section">
     <div class="container-x grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {projects.map((p) => (
