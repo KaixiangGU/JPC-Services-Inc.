@@ -38,5 +38,11 @@ error_page 404 /404.html;
 ## Rolling back
 Move `wordpress-old/` contents back into `httpdocs/`.
 
+## Quote form on the Netlify preview
+On Netlify the form uses **Netlify Forms** (the PHP handler only runs on Hustly).
+To get emails: Netlify → your site → **Forms** → enable form detection (if asked) →
+**Form notifications → Add notification → Email notification** → `jeffpartners@gmail.com`.
+Netlify Forms accepts 1 photo per request; the Hustly version accepts up to 5.
+
 ## Alternative: Netlify (free)
 If Hustly can't serve a static site, connect this GitHub repo to Netlify (build command `npm run build`, publish dir `dist`), then point the domain's DNS to Netlify. The quote form would then need Netlify Forms instead of `contact.php`.

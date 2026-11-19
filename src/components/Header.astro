@@ -1,26 +1,26 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../assets/images/logo.png';
+import logoWhite from '../assets/images/logo-white.png';
 import Icon from './Icon.astro';
-import { nav, site } from '../data/site';
+import { nav, site, phones } from '../data/site';
 
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
-<!-- Floating header: overlaps the top of each page's hero (see -mb) -->
-<header class="sticky top-0 z-50 -mb-[76px] px-3 pt-3 lg:-mb-[92px] lg:pt-4">
-  <div class="mx-auto max-w-7xl rounded-xl bg-white shadow-lg shadow-navy-950/10 ring-1 ring-slate-900/5">
-    <div class="flex h-16 items-center justify-between gap-4 pl-4 pr-2 lg:h-[76px] lg:pl-6 lg:pr-3">
+<!-- Transparent header over each page's dark hero; gains a navy background once the page scrolls. -->
+<header id="site-header" class="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-navy-950/75 via-navy-950/35 to-transparent transition-colors duration-300">
+  <div class="container-x">
+    <div class="flex h-20 items-center justify-between gap-4 border-b border-white/15 lg:h-24" id="header-bar">
       <a href="/" class="shrink-0" aria-label={`${site.name} home`}>
-        <Image src={logo} alt={site.name} width={200} class="h-9 w-auto lg:h-11" loading="eager" />
+        <Image src={logoWhite} alt={site.name} width={220} class="h-10 w-auto drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)] lg:h-12" loading="eager" />
       </a>
       <nav class="hidden lg:block" aria-label="Main">
         <ul class="flex items-center gap-1">
           {nav.map((item) => (
             <li>
               <a href={item.href}
-                 class:list={['relative px-4 py-2 text-[15px] font-semibold transition-colors',
-                   isActive(item.href) ? 'text-brand-600' : 'text-navy-900 hover:text-brand-600']}
+                 class:list={['relative px-4 py-2 text-[15px] font-semibold text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.35)] transition-colors hover:text-accent-500',
+                   isActive(item.href) && 'text-accent-500']}
                  aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}
                 {isActive(item.href) && <span class="absolute inset-x-4 -bottom-0.5 h-0.5 rounded bg-accent-500"></span>}
@@ -30,33 +30,46 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         </ul>
       </nav>
       <div class="flex items-center gap-2">
-        <a href={site.phoneHref} class="hidden items-center gap-3 rounded-lg px-3 py-2 sm:flex">
-          <span class="grid h-11 w-11 place-items-center rounded-full bg-accent-500 text-white"><Icon name="phone" class="h-5 w-5" /></span>
-          <span class="leading-tight">
-            <span class="block text-xs text-muted">Call for a free quote</span>
-            <span class="block text-base font-bold text-navy-900">{site.phone}</span>
+        <div class="hidden items-center gap-3 sm:flex">
+          <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent-500 text-white"><Icon name="phone" class="h-5 w-5" /></span>
+          <span class="leading-tight [text-shadow:0_1px_8px_rgba(0,0,0,0.35)]">
+            <span class="block text-xs text-white/75">Call for a free quote</span>
+            {phones.map((p) => <a href={p.href} class="block text-[15px] font-bold text-white hover:text-accent-500">{p.number}</a>)}
           </span>
-        </a>
-        <button id="menu-btn" type="button" class="grid h-11 w-11 place-items-center rounded-lg text-navy-900 lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        </div>
+        <button id="menu-btn" type="button" class="grid h-11 w-11 place-items-center rounded-lg text-white lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           <Icon name="menu" class="h-7 w-7" />
         </button>
       </div>
     </div>
-    <nav id="mobile-menu" class="hidden border-t border-slate-100 lg:hidden" aria-label="Mobile">
-      <ul class="flex flex-col p-2">
-        {nav.map((item) => (
-          <li><a href={item.href} class:list={['block rounded-lg px-4 py-3 text-base font-semibold', isActive(item.href) ? 'bg-brand-100 text-brand-600' : 'text-navy-900']}>{item.label}</a></li>
-        ))}
-      </ul>
-    </nav>
   </div>
+  <nav id="mobile-menu" class="hidden bg-navy-950 lg:hidden" aria-label="Mobile">
+    <ul class="container-x flex flex-col py-3">
+      {nav.map((item) => (
+        <li><a href={item.href} class:list={['block rounded-lg px-3 py-3 text-base font-semibold', isActive(item.href) ? 'text-accent-500' : 'text-white']}>{item.label}</a></li>
+      ))}
+      {phones.map((p) => (
+        <li><a href={p.href} class="flex items-center gap-3 rounded-lg px-3 py-3 font-bold text-white"><Icon name="phone" class="h-5 w-5 text-accent-500" />{p.number}</a></li>
+      ))}
+    </ul>
+  </nav>
 </header>
 <script>
+  const header = document.getElementById('site-header');
   const btn = document.getElementById('menu-btn');
   const menu = document.getElementById('mobile-menu');
+  const solid = ['bg-navy-950/95', 'shadow-lg', 'backdrop-blur'];
+  const update = () => {
+    const on = window.scrollY > 40 || !menu?.classList.contains('hidden');
+    solid.forEach((c) => header?.classList.toggle(c, on));
+    header?.classList.toggle('bg-gradient-to-b', !on);
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  update();
   btn?.addEventListener('click', () => {
     const open = menu?.classList.toggle('hidden') === false;
     btn.setAttribute('aria-expanded', String(open));
     btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    update();
   });
 </script>

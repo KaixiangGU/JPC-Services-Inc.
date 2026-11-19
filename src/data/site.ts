@@ -7,6 +7,8 @@ export const site = {
     "Greater Vancouver's trusted team for water damage restoration, leak detection, renovations and strata maintenance. A+ BBB rated. Free quotes.",
   phone: '778-888-8688',
   phoneHref: 'tel:+17788888688',
+  phone2: '604-338-6726',
+  phone2Href: 'tel:+16043386726',
   email: 'jeffpartners@gmail.com',
   address: {
     street: '12191 Hammersmith Way, Unit 2110',
@@ -41,6 +43,11 @@ export const site = {
   // Where the quote form posts to. contact.php runs on the current Plesk (Hustly) hosting.
   formAction: '/contact.php',
 };
+
+export const phones = [
+  { number: site.phone, href: site.phoneHref },
+  { number: site.phone2, href: site.phone2Href },
+];
 
 export const yearsInBusiness = new Date().getFullYear() - site.foundedYear;
 

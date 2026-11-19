@@ -21,7 +21,7 @@ function fail(string $msg, int $code = 400): void {
     echo "<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
        . "<title>Request not sent</title><body style='font-family:system-ui,sans-serif;max-width:560px;margin:4rem auto;padding:0 1rem;line-height:1.5'>"
        . "<h1 style='color:#0d223f'>Sorry, your request wasn’t sent</h1><p>$safe</p>"
-       . "<p>Please <a href='javascript:history.back()'>go back</a> and try again, or call us at <a href='tel:+17788888688'>778-888-8688</a>.</p></body>";
+       . "<p>Please <a href='javascript:history.back()'>go back</a> and try again, or call us at <a href='tel:+17788888688'>778-888-8688</a> or <a href='tel:+16043386726'>604-338-6726</a>.</p></body>";
     exit;
 }
 

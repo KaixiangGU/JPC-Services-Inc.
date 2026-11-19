@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { site } from '../data/site';
+import { phones } from '../data/site';
 interface Props { title?: string; text?: string }
 const { title = 'Leak, water damage or renovation? We’re ready to help.', text = 'Tell us about your project and we’ll get back to you with a free quote.' } = Astro.props;
 ---
@@ -10,9 +10,9 @@ const { title = 'Leak, water damage or renovation? We’re ready to help.', text
       <h2 class="text-4xl !text-white sm:text-5xl">{title}</h2>
       <p class="mt-3 text-white/75">{text}</p>
     </div>
-    <div class="flex flex-col gap-3 sm:flex-row">
+    <div class="flex flex-col flex-wrap gap-3 sm:flex-row">
       <a href="/contact-us/" class="btn-primary py-4 text-base"><span class="btn-icon"><Icon name="arrowUp" class="h-4 w-4" /></span>Get a Free Quote</a>
-      <a href={site.phoneHref} class="btn-blue py-4 text-base"><span class="btn-icon"><Icon name="phone" class="h-4 w-4" /></span>{site.phone}</a>
+      {phones.map((p) => <a href={p.href} class="btn-blue py-4 text-base"><span class="btn-icon"><Icon name="phone" class="h-4 w-4" /></span>{p.number}</a>)}
     </div>
   </div>
 </section>

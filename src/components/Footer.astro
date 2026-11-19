@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import badges from '../assets/images/badges.png';
 import Icon from './Icon.astro';
-import { site, nav } from '../data/site';
+import { site, nav, phones } from '../data/site';
 import { services } from '../data/services';
 const year = new Date().getFullYear();
 ---
@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
     <div class="lg:col-span-3">
       <p class="font-display text-lg font-bold uppercase tracking-wide text-white">Contact</p>
       <ul class="mt-4 space-y-3 text-sm">
-        <li><a href={site.phoneHref} class="flex gap-3 font-semibold text-white hover:text-accent-500"><Icon name="phone" class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" />{site.phone}</a></li>
+        {phones.map((p) => <li><a href={p.href} class="flex gap-3 font-semibold text-white hover:text-accent-500"><Icon name="phone" class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" />{p.number}</a></li>)}
         <li><a href={`mailto:${site.email}`} class="flex gap-3 break-all hover:text-accent-500"><Icon name="mail" class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" />{site.email}</a></li>
         <li><a href={site.mapsUrl} target="_blank" rel="noopener" class="flex gap-3 hover:text-accent-500"><Icon name="pin" class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" /><span>{site.address.street}<br />{site.address.city}, {site.address.region} {site.address.postalCode}</span></a></li>
         <li class="flex gap-3"><Icon name="clock" class="mt-0.5 h-4 w-4 shrink-0 text-accent-500" /><span>{site.hours.map((h) => <span class="block">{h.days}: {h.time}</span>)}</span></li>
